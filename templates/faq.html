@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Student Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        /* FAQ Container Styling */
+        .faq-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-btn:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .faq-title {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .faq-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Search Bar Styling */
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-box:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Accordion Item Styling */
+        .faq-item {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        /* Question Button Styling */
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #f8fafc;
+        }
+
+        /* The Arrow Icon */
+        .faq-icon {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+            color: #94a3b8;
+        }
+
+        /* Active State (When open) */
+        .faq-item.active .faq-question {
+            background-color: #f1f5f9;
+            color: #2563eb;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #2563eb;
+        }
+
+        /* Answer Panel Styling */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #ffffff;
+        }
+
+        .faq-answer-content {
+            padding: 0 20px 20px 20px;
+            color: #475569;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* No Results Message */
+        #no-results {
+            display: none;
+            text-align: center;
+            color: #64748b;
+            margin-top: 30px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <a href="{{ url_for('home') }}" class="back-btn">← Back to Dashboard</a>
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+        <p class="faq-subtitle">Quick answers to common questions about college life, academics, and administration.</p>
+
+        <!-- Dynamic Filter Search Bar -->
+        <input type="text" id="searchBar" class="search-box" placeholder="Search for questions (e.g., exams, placements, library)...">
+
+        <div id="faq-list">
+            <!-- FAQ Item 1: Academics & Exams -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I check my internal and external exam schedules?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Sessional and external exam schedules, along with seating plans, are posted on departmental notice boards and uploaded to the college ERP portal. You can also query the AI Chatbot on your dashboard for live updates.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2: Placements -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Where can I find updates regarding upcoming campus placement drives?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        The Training & Placement (T&P) cell coordinates all campus placement activities. Company eligibility requirements, schedules, and register links are distributed via your student email portal and official Telegram/WhatsApp groups.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3: Fee Payment Failure -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What steps should I take if my online fee payment fails but money is deducted?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Do not panic. Bank gateways typically resolve failed transactions within 24 to 48 working hours. If the status doesn't change to "Paid" on your student ledger after 2 days, take your bank statement receipt directly to the Accounts Office.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4: Attendance Criteria -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What is the minimum attendance requirement to sit for university exams?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Students must maintain a minimum of 75% attendance in each individual course. Shortfalls below 75% require official medical certificates or authorized duty leaves submitted to your Head of Department (HOD) for review.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5: Admissions & Roll Numbers -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I get my official university roll number and identity card?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Official roll numbers are assigned by the Registrar's Office after document verification completes. Identity cards are issued by the library or your respective department coordinator within the first month of registration.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 6: Library Rules -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How many books can I borrow from the Central Library and for how long?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Undergraduate engineering students can borrow up to 3 books simultaneously for a period of 14 days. Renewals can be requested twice if no reservations exist on those books. Late fees apply for overdue materials.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 7: Branch / Course Change -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Is it possible to request a branch change after the first year?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes, branch reallocation is allowed at the beginning of the 3rd semester, subject to university rules. It depends strictly on your first-year CGPA performance, clean academic record (no carry-overs), and vacant seats within the targeted branch.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 8: Scholarships -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I apply for state and institutional scholarship schemes?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Application calls for state scholarships (like Digital Gujarat, UP Scholarship, etc.) or merit-cum-means awards are announced annually. Necessary verification forms, income certs, and mark sheets must be submitted to the Student Welfare section.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fallback Element -->
+        <div id="no-results">No matching questions found. Try searching another keyword!</div>
+    </div>
+
+    <!-- Interactive Script Logic -->
+    <script>
+        // 1. Accordion Toggle Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const answerPanel = button.nextElementSibling;
+
+                faqItem.classList.toggle('active');
+
+                if (faqItem.classList.contains('active')) {
+                    answerPanel.style.maxHeight = answerPanel.scrollHeight + "px";
+                } else {
+                    answerPanel.style.maxHeight = null;
+                }
+
+                // Smoothly close neighboring answers
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+            });
+        });
+
+        // 2. Real-time Search Filtering Logic
+        const searchBar = document.getElementById('searchBar');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const noResults = document.getElementById('no-results');
+
+        searchBar.addEventListener('keyup', (e) => {
+            const searchString = e.target.value.toLowerCase();
+            let matchesFound = false;
+
+            faqItems.forEach(item => {
+                const questionText = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answerText = item.querySelector('.faq-answer-content').textContent.toLowerCase();
+
+                if (questionText.includes(searchString) || answerText.includes(searchString)) {
+                    item.style.display = "block";
+                    matchesFound = true;
+                } else {
+                    item.style.display = "none";
+                    // Reset open classes if item becomes hidden
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').style.maxHeight = null;
+                }
+            });
+
+            // Handle condition where user text has no overlap with data
+            noResults.style.display = matchesFound ? "none" : "block";
+        });
+    </script>
+</body>
+</html>
