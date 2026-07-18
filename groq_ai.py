@@ -46,3 +46,4 @@ Rules:
         print("Groq Error:", e)
 
         return "Sorry, I'm unable to connect to the AI service."
+    

@@ -237,3 +237,5 @@ def logout():
 if __name__ == "__main__":
     init_db()  # Setup tables automatically if missing
     app.run(debug=True)
+
+    
