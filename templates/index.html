@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Student Support Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+         🤖 AI Student Support
+     </div>
+
+        <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('chatbot') }}">Chatbot</a></li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+</ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-text">
+
+        <h1>
+            Your AI Student Support Assistant
+        </h1>
+
+       <p>
+
+       Get instant answers to admissions,
+       fees, exams, attendance,
+      placements and much more.
+
+       </p>
+
+        <a href="{{ url_for('chatbot') }}" class="btn">
+    Start Chatting
+</a>
+
+         </div>
+
+            <div class="hero-image">
+
+            <img src="{{ url_for('static', filename='images/ai_image.png') }}">
+
+           </div>
+
+     </section>
+    <!-- static Section -->
+     <section class="stats">
+
+<div>
+
+<h2>5000+</h2>
+
+<p>Students</p>
+
+</div>
+
+<div>
+
+<h2>100+</h2>
+
+<p>FAQs</p>
+
+</div>
+
+<div>
+
+<h2>24/7</h2>
+
+<p>Support</p>
+
+</div>
+
+<div>
+
+<h2>99%</h2>
+
+<p>Accuracy</p>
+
+</div>
+
+</section>
+
+         <section class="why-us">
+
+    <h2>Why Choose Our AI Chatbot?</h2>
+
+    <div class="why-container">
+
+        <div class="why-card">
+            <h3>🤖 AI Powered</h3>
+            <p>Instant and intelligent answers for student queries.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>⚡ Fast Response</h3>
+            <p>Receive answers within seconds, anytime.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>📚 Academic Help</h3>
+            <p>Admissions, exams, fees, attendance, placements and more.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>🔒 Secure</h3>
+            <p>Your conversations remain private and secure.</p>
+        </div>
+
+    </div>
+
+</section>
+    <!-- Features -->
+    <section class="features">
+
+        <div class="card">
+            <h2>🤖 AI Chat</h2>
+            <p>Ask academic questions instantly.</p>
+        </div>
+
+        <div class="card">
+            <h2>📚 FAQs</h2>
+            <p>Find answers to common student queries.</p>
+        </div>
+
+        <div class="card">
+            <h2>📢 Notices</h2>
+            <p>Stay updated with college announcements.</p>
+        </div>
+
+        <div class="card">
+            <h2>🎓 Student Support</h2>
+            <p>24/7 support for every student.</p>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 AI Student Support Chatbot | Made by Sushant</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <a href="{{ url_for('chatbot') }}" class="floating-chat">
+    💬
+</a>
+</body>
+</html>

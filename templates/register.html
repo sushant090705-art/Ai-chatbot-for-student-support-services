@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | AI Student Support</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="register-container">
+
+<div class="register-card">
+
+<div class="logo">
+
+🤖
+
+</div>
+
+<h1>Create Account</h1>
+
+<p class="subtitle">
+
+Join AI Student Support Portal
+
+</p>
+
+<form method="POST" action="{{ url_for('register') }}">
+
+<div class="input-group">
+
+<label>Full Name</label>
+
+<input
+type="text"
+name="name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input
+type="email"
+name="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Create password"
+required>
+
+<button
+type="button"
+id="togglePassword"
+class="eye-btn">
+
+👁
+
+</button>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm password"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Branch</label>
+
+<select name="branch" required>
+
+<option value="">Select Branch</option>
+
+<option>CSE</option>
+
+<option>IT</option>
+
+<option>ECE</option>
+
+<option>EEE</option>
+
+<option>ME</option>
+
+<option>CE</option>
+
+</select>
+
+</div>
+
+<div class="input-group">
+
+<label>Year</label>
+
+<select name="year" required>
+
+<option value="">Select Year</option>
+
+<option>1st Year</option>
+
+<option>2nd Year</option>
+
+<option>3rd Year</option>
+
+<option>4th Year</option>
+
+</select>
+
+</div>
+
+<button class="register-btn">
+
+Create Account
+
+</button>
+
+</form>
+
+<div class="divider">
+
+<span>OR</span>
+
+</div>
+
+<p class="login-text">
+
+Already have an account?
+
+<a href="{{ url_for('login') }}">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+
+</body>
+
+</html>

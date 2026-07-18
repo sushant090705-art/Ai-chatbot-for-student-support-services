@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Student Support</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            🤖
+
+            <h2>AI Student</h2>
+
+        </div>
+
+        <button class="menu-btn">
+
+            ➕ New Chat
+
+        </button>
+
+        <button class="menu-btn">
+
+            💬 Chat History
+
+        </button>
+
+        <button class="menu-btn">
+
+            📚 FAQ
+
+        </button>
+
+        <button class="menu-btn">
+
+            📞 Contact
+
+        </button>
+
+        <button class="menu-btn">
+
+            🌙 Dark Mode
+
+        </button>
+
+        <div class="profile">
+
+            <div class="avatar">
+
+                👤
+
+            </div>
+
+            <div>
+
+                <h4>Sushant</h4>
+
+                <p>Student</p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- Main Chat -->
+
+    <main class="chat-area">
+
+        <header class="chat-header">
+
+            <div>
+
+                <h2>AI Student Support Chatbot</h2>
+
+                <p>Ask anything related to academics.</p>
+
+            </div>
+
+            <button class="clear-btn" onclick="clearChat()">
+
+                Clear Chat
+
+            </button>
+
+        </header>
+
+        <section class="chat-box" id="chatBox">
+
+            <div class="bot-message">
+
+                <div class="avatar-circle">
+
+                    🤖
+
+                </div>
+
+                <div class="message">
+
+                    <p>Hello 👋</p>
+
+                    <p>I'm your AI Student Support Assistant.</p>
+
+                    <span class="time">Now</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div id="typing" class="typing">
+
+            🤖 Typing...
+
+        </div>
+
+        <footer class="input-area">
+
+            <button onclick="document.getElementById('fileInput').click()">
+
+                📎
+
+            </button>
+
+            <input
+                type="file"
+                hidden
+                id="fileInput"
+            >
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Ask your question..."
+            >
+
+            <button id="micBtn">
+
+                🎤
+
+            </button>
+
+            <button id="sendBtn" onclick="sendMessage()">
+
+                ➤
+
+            </button>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+</body>
+</html>
