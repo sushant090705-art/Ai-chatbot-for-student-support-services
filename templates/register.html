@@ -2,183 +2,271 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | AI Student Support Portal</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Space Grotesk, Orbitron & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<title>Register | AI Student Support</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 
 <body>
 
-<div class="background"></div>
-
-<div class="register-container">
-
-<div class="register-card">
-
-<div class="logo">
-
-🤖
-
-</div>
-
-<h1>Create Account</h1>
-
-<p class="subtitle">
-
-Join AI Student Support Portal
-
-</p>
-
-<form method="POST" action="{{ url_for('register') }}">
-
-<div class="input-group">
-
-<label>Full Name</label>
-
-<input
-type="text"
-name="name"
-placeholder="Enter your full name"
-required>
-
-</div>
-
-<div class="input-group">
-
-<label>Email</label>
-
-<input
-type="email"
-name="email"
-placeholder="Enter your email"
-required>
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<div class="password-box">
-
-<input
-type="password"
-id="password"
-name="password"
-placeholder="Create password"
-required>
-
-<button
-type="button"
-id="togglePassword"
-class="eye-btn">
-
-👁
-
-</button>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Confirm Password</label>
-
-<input
-type="password"
-id="confirmPassword"
-placeholder="Confirm password"
-required>
-
-</div>
-
-<div class="input-group">
-
-<label>Branch</label>
-
-<select name="branch" required>
-
-<option value="">Select Branch</option>
-
-<option>CSE</option>
-
-<option>IT</option>
-
-<option>ECE</option>
-
-<option>EEE</option>
-
-<option>ME</option>
-
-<option>CE</option>
-
-</select>
-
-</div>
-
-<div class="input-group">
-
-<label>Year</label>
-
-<select name="year" required>
-
-<option value="">Select Year</option>
-
-<option>1st Year</option>
-
-<option>2nd Year</option>
-
-<option>3rd Year</option>
-
-<option>4th Year</option>
-
-</select>
-
-</div>
-
-<button class="register-btn">
-
-Create Account
-
-</button>
-
-</form>
-
-<div class="divider">
-
-<span>OR</span>
-
-</div>
-
-<p class="login-text">
-
-Already have an account?
-
-<a href="{{ url_for('login') }}">
-
-Login
-
-</a>
-
-</p>
-
-</div>
-
-</div>
-
-<script src="{{ url_for('static', filename='js/register.js') }}"></script>
-
+    <!-- Cyberpunk Tech Ambient Background -->
+    <div class="cyber-background">
+        <div class="tech-grid"></div>
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-violet"></div>
+        <div class="scanline"></div>
+    </div>
+
+    <div class="register-container">
+
+        <div class="register-card">
+            <!-- Tech Frame Corner Accents -->
+            <span class="corner-bracket top-left"></span>
+            <span class="corner-bracket top-right"></span>
+            <span class="corner-bracket bottom-left"></span>
+            <span class="corner-bracket bottom-right"></span>
+
+            <!-- AI Emblem Header -->
+            <div class="header-section">
+                <div class="ai-core-badge">
+                    <div class="pulse-ring"></div>
+                    <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                        <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                        <path d="M9 18h6"></path>
+                    </svg>
+                </div>
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">NEW REGISTRATION</span>
+                </div>
+
+                <h1 class="portal-title">CREATE ACCOUNT</h1>
+                <p class="subtitle">Join the AI Student Support Portal</p>
+            </div>
+
+            <!-- Error Notification Banner -->
+            <div id="errorAlert" class="error-alert" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span id="errorMessage">Passwords do not match!</span>
+            </div>
+
+            <!-- Registration Form -->
+            <form method="POST" action="{{ url_for('register') }}" class="cyber-form" id="registerForm">
+
+                <!-- Full Name Field -->
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                        <input type="text" id="name" name="name" placeholder=" " autocomplete="name" required>
+                        <label for="name">Full Name</label>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </span>
+                        <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required>
+                        <label for="email">Student Email</label>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </span>
+                        <input type="password" id="password" name="password" placeholder=" " autocomplete="new-password"
+                            required>
+                        <label for="password">Create Password</label>
+
+                        <button type="button" id="togglePassword" class="eye-toggle-btn"
+                            aria-label="Toggle password visibility">
+                            <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg class="eye-icon eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                                </path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                        </button>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </span>
+                        <input type="password" id="confirmPassword" placeholder=" " autocomplete="new-password"
+                            required>
+                        <label for="confirmPassword">Confirm Password</label>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <!-- Branch & Year Row -->
+                <div class="select-row">
+                    <!-- Branch Field -->
+                    <div class="input-group">
+                        <div class="input-wrapper select-wrapper">
+                            <span class="input-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                </svg>
+                            </span>
+                            <select name="branch" id="branch" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="CSE">CSE</option>
+                                <option value="IT">IT</option>
+                                <option value="ECE">ECE</option>
+                                <option value="EEE">EEE</option>
+                                <option value="ME">ME</option>
+                                <option value="CE">CE</option>
+                            </select>
+                            <label for="branch">Branch</label>
+                            <span class="select-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+
+                    <!-- Year Field -->
+                    <div class="input-group">
+                        <div class="input-wrapper select-wrapper">
+                            <span class="input-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                            <select name="year" id="year" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                            </select>
+                            <label for="year">Year</label>
+                            <span class="select-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cyber Submit Button -->
+                <button class="cyber-btn" type="submit" id="submitBtn">
+                    <span class="btn-glow"></span>
+                    <span class="btn-content">
+                        <span class="btn-text">INITIALIZE ACCOUNT</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </span>
+                    <span class="btn-spinner" style="display: none;">
+                        <svg class="spinner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="10"></circle>
+                        </svg>
+                        <span>CREATING ACCOUNT...</span>
+                    </span>
+                </button>
+
+            </form>
+
+            <!-- Divider -->
+            <div class="tech-divider">
+                <span>OR</span>
+            </div>
+
+            <!-- Footer Links -->
+            <div class="footer-actions">
+                <p class="login-prompt">
+                    Already have an account?
+                    <a href="{{ url_for('login') }}" class="cyber-link">Sign In</a>
+                </p>
+
+                <div class="back-home">
+                    <a href="{{ url_for('index') }}" class="home-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 
 </html>

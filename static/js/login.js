@@ -1,76 +1,72 @@
-// Show / Hide Password
+// ==========================================================================
+// CYBERPUNK TECH AI PORTAL - LOGIN SCRIPT
+// ==========================================================================
 
-const togglePassword = document.getElementById("togglePassword");
-const password = document.getElementById("password");
+document.addEventListener("DOMContentLoaded", function () {
 
-togglePassword.addEventListener("click", function () {
+    // 1. Password Visibility Toggle
+    const togglePasswordBtn = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
 
-    if (password.type === "password") {
+    if (togglePasswordBtn && passwordInput) {
+        const eyeOpen = togglePasswordBtn.querySelector(".eye-open");
+        const eyeClosed = togglePasswordBtn.querySelector(".eye-closed");
 
-        password.type = "text";
-        togglePassword.innerHTML = "🙈";
+        togglePasswordBtn.addEventListener("click", function () {
+            const isPassword = passwordInput.type === "password";
 
-    } else {
+            passwordInput.type = isPassword ? "text" : "password";
 
-        password.type = "password";
-        togglePassword.innerHTML = "👁";
-
+            if (eyeOpen && eyeClosed) {
+                eyeOpen.style.display = isPassword ? "none" : "block";
+                eyeClosed.style.display = isPassword ? "block" : "none";
+            }
+        });
     }
 
-});
+    // 2. Input Field Value Tracker (Floating Label support for autofill)
+    const formInputs = document.querySelectorAll(".input-wrapper input");
 
-
-// Login Button Loading Effect
-
-const form = document.querySelector("form");
-const loginBtn = document.querySelector(".login-btn");
-
-form.addEventListener("submit", function () {
-
-    loginBtn.innerHTML = "Logging in...";
-
-    loginBtn.disabled = true;
-
-});
-
-
-// Email Validation
-
-const emailInput = document.querySelector("input[name='email']");
-
-emailInput.addEventListener("blur", function () {
-
-    const email = emailInput.value.trim();
-
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (email !== "" && !pattern.test(email)) {
-
-        alert("Please enter a valid email address.");
-
-        emailInput.focus();
-
+    function checkInputValue(input) {
+        if (input.value.trim() !== "") {
+            input.classList.add("has-value");
+        } else {
+            input.classList.remove("has-value");
+        }
     }
 
-});
+    formInputs.forEach(input => {
+        // Initial check on load (handles browser pre-filled values)
+        checkInputValue(input);
 
+        // Check on user typing or paste
+        input.addEventListener("input", function () {
+            checkInputValue(input);
+        });
 
-// Input Focus Animation
-
-const inputs = document.querySelectorAll("input");
-
-inputs.forEach(input => {
-
-    input.addEventListener("focus", function () {
-
-        input.style.border = "2px solid #2563EB";
-
+        // Check on blur
+        input.addEventListener("blur", function () {
+            checkInputValue(input);
+        });
     });
 
-    input.addEventListener("blur", function () {
+    // 3. Form Submit State Animation
+    const loginForm = document.getElementById("loginForm");
+    const submitBtn = document.getElementById("submitBtn");
 
-        input.style.border = "none";
+    if (loginForm && submitBtn) {
+        loginForm.addEventListener("submit", function () {
+            const btnContent = submitBtn.querySelector(".btn-content");
+            const btnSpinner = submitBtn.querySelector(".btn-spinner");
 
-    });
+            if (btnContent && btnSpinner) {
+                btnContent.style.display = "none";
+                btnSpinner.style.display = "flex";
+            }
+
+            submitBtn.style.pointerEvents = "none";
+            submitBtn.style.opacity = "0.9";
+        });
+    }
 
 });

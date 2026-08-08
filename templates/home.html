@@ -2,116 +2,280 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AI Student Support Portal</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Space Grotesk, Orbitron & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<title>Home | AI Student Support</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 
 <body>
 
-<div class="sidebar">
+    <!-- Cyberpunk Tech Ambient Background -->
+    <div class="cyber-background">
+        <div class="tech-grid"></div>
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-violet"></div>
+        <div class="scanline"></div>
+    </div>
 
-<h2>🎓 Student Portal</h2>
+    <!-- Cyber Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="ai-core-badge">
+                <div class="pulse-ring"></div>
+                <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <path d="M12 7v4"></path>
+                    <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                    <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                    <path d="M9 18h6"></path>
+                </svg>
+            </div>
+            <h2 class="portal-brand">STUDENT PORTAL</h2>
+            <span class="version-tag">v2.0 CYBER</span>
+        </div>
 
-<a href="{{ url_for('chatbot') }}">🤖 AI Chatbot</a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Command Home</span>
+            </a>
 
-<a href="{{ url_for('profile') }}">👤 My Profile</a>
+            <a href="{{ url_for('chatbot') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <path d="M12 7v4"></path>
+                    <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                    <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                </svg>
+                <span>AI Chatbot</span>
+            </a>
 
-<a href="#">📢 Notices</a>
+            <a href="{{ url_for('profile') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>My Profile</span>
+            </a>
 
-<a href="{{ url_for('faq') }}">❓ FAQ</a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span>Notices</span>
+            </a>
 
-<a href="{{ url_for('contact') }}">📞 Contact</a>
+            <a href="{{ url_for('faq') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>FAQ</span>
+            </a>
 
-<a href="{{ url_for('logout') }}">🚪 Logout</a>
+            <a href="{{ url_for('contact') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                <span>Contact</span>
+            </a>
 
-</div>
+            <a href="{{ url_for('logout') }}" class="nav-item logout-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </aside>
 
-<div class="main">
+    <!-- Main Content Area -->
+    <main class="main-content">
 
-<div class="topbar">
+        <!-- Top Status Banner -->
+        <header class="topbar">
+            <div class="topbar-content">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">SESSION ACTIVE</span>
+                </div>
+                <h1 class="welcome-title">WELCOME BACK, <span class="user-highlight">{{ name }}</span></h1>
+                <p class="welcome-subtitle">AI Student Support Command Center</p>
+            </div>
+        </header>
 
-<h1>Welcome, {{ name }} 👋</h1>
+        <!-- Quick Cards Grid -->
+        <div class="cards-grid">
 
-<p>AI Student Support Portal</p>
+            <!-- AI Chatbot Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge cyan-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                        <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>AI Chatbot Assistant</h3>
+                <p>Instant 24/7 academic assistance, coursework support, and instant query resolution.</p>
+                <a href="{{ url_for('chatbot') }}" class="cyber-card-btn">
+                    <span>LAUNCH CHATBOT</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-</div>
+            <!-- Profile Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge violet-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Student Profile</h3>
+                <p>View and manage your account details, academic branch, and registered year information.</p>
+                <a href="{{ url_for('profile') }}" class="cyber-card-btn">
+                    <span>MY PROFILE</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-<div class="cards">
+            <!-- Notices Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge cyan-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </div>
+                <h3>Campus Notices</h3>
+                <p>Stay updated with official college announcements, exam schedules, and circulars.</p>
+                <a href="#" class="cyber-card-btn">
+                    <span>VIEW NOTICES</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-<div class="card">
+            <!-- FAQ Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge violet-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <h3>Knowledgebase FAQ</h3>
+                <p>Browse answers to common university questions, campus procedures, and policies.</p>
+                <a href="{{ url_for('faq') }}" class="cyber-card-btn">
+                    <span>EXPLORE FAQ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-<h2>🤖 AI Chatbot</h2>
+            <!-- Contact Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge cyan-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                </div>
+                <h3>Support & Contact</h3>
+                <p>Reach out directly to university administration and student helpdesk support.</p>
+                <a href="{{ url_for('contact') }}" class="cyber-card-btn">
+                    <span>CONTACT SUPPORT</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-<p>Ask academic questions anytime.</p>
+            <!-- Logout Card -->
+            <div class="cyber-card">
+                <span class="corner-bracket top-left"></span>
+                <span class="corner-bracket bottom-right"></span>
+                <div class="card-icon-badge red-glow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </div>
+                <h3>Terminate Session</h3>
+                <p>Log out safely to protect your student portal data and account security.</p>
+                <a href="{{ url_for('logout') }}" class="cyber-card-btn logout-btn">
+                    <span>LOGOUT</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
 
-<a href="{{ url_for('chatbot') }}">Open Chat</a>
+        </div>
 
-</div>
-
-<div class="card">
-
-<h2>📢 Notices</h2>
-
-<p>Latest college announcements.</p>
-
-<a href="#">View</a>
-
-</div>
-
-<div class="card">
-
-<h2>👤 My Profile</h2>
-
-<p>Manage your account.</p>
-
-<a href="{{ url_for('profile') }}">Open</a>
-
-</div>
-
-<div class="card">
-
-<h2>❓ FAQ</h2>
-
-<p>Frequently asked questions.</p>
-
-<a href="{{ url_for('faq') }}">Open</a>
-
-</div>
-
-<div class="card">
-
-<h2>📞 Contact</h2>
-
-<p>Need help? Contact us.</p>
-
-<a href="{{ url_for('contact') }}">Open</a>
-
-</div>
-
-<div class="card">
-
-<h2>🚪 Logout</h2>
-
-<p>Exit your account securely.</p>
-
-<a href="{{ url_for('logout') }}">Logout</a>
-
-</div>
-
-</div>
-
-</div>
+    </main>
 
 </body>
 

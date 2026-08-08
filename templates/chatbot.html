@@ -1,176 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant | AI Student Support</title>
 
-    <title>AI Student Support</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Space Grotesk, Orbitron & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
-
 </head>
-
 <body>
 
-<div class="app">
+    <!-- Cyber Ambient Background -->
+    <div class="cyber-background">
+        <div class="tech-grid"></div>
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-violet"></div>
+        <div class="scanline"></div>
+    </div>
 
-    <!-- Sidebar -->
+    <div class="app">
 
-    <aside class="sidebar">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
 
-        <div class="logo">
-
-            🤖
-
-            <h2>AI Student</h2>
-
-        </div>
-
-        <button class="menu-btn">
-
-            ➕ New Chat
-
-        </button>
-
-        <button class="menu-btn">
-
-            💬 Chat History
-
-        </button>
-
-        <button class="menu-btn">
-
-            📚 FAQ
-
-        </button>
-
-        <button class="menu-btn">
-
-            📞 Contact
-
-        </button>
-
-        <button class="menu-btn">
-
-            🌙 Dark Mode
-
-        </button>
-
-        <div class="profile">
-
-            <div class="avatar">
-
-                👤
-
+            <div class="sidebar-header">
+                <div class="ai-core-badge">
+                    <div class="pulse-ring"></div>
+                    <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                        <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                    </svg>
+                </div>
+                <h2 class="portal-brand">AI ASSISTANT</h2>
+                <span class="version-tag">STYLISH & DECENT</span>
             </div>
 
-            <div>
-
-                <h4>Sushant</h4>
-
-                <p>Student</p>
-
+            <!-- Quick Action Menu -->
+            <div class="sidebar-actions">
+                <button class="menu-btn new-chat-btn" onclick="clearChat()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>New Chat Session</span>
+                </button>
             </div>
 
-        </div>
+            <!-- Portal Links -->
+            <nav class="nav-menu">
+                <a href="{{ url_for('home') }}" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Dashboard Home</span>
+                </a>
 
-    </aside>
+                <a href="{{ url_for('profile') }}" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>My Profile</span>
+                </a>
 
-    <!-- Main Chat -->
+                <a href="{{ url_for('faq') }}" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>FAQ Knowledgebase</span>
+                </a>
 
-    <main class="chat-area">
+                <a href="{{ url_for('contact') }}" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span>Helpdesk Support</span>
+                </a>
+            </nav>
 
-        <header class="chat-header">
-
-            <div>
-
-                <h2>AI Student Support Chatbot</h2>
-
-                <p>Ask anything related to academics.</p>
-
+            <!-- Bottom Profile & Logout Bar -->
+            <div class="sidebar-footer">
+                <a href="{{ url_for('logout') }}" class="nav-item logout-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Logout</span>
+                </a>
             </div>
 
-            <button class="clear-btn" onclick="clearChat()">
+        </aside>
 
-                Clear Chat
+        <!-- Main Chat Engine Container -->
+        <main class="chat-area">
 
-            </button>
-
-        </header>
-
-        <section class="chat-box" id="chatBox">
-
-            <div class="bot-message">
-
-                <div class="avatar-circle">
-
-                    🤖
-
+            <!-- Chat Topbar Header -->
+            <header class="chat-header">
+                <div class="header-info">
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">SYSTEM READY • 24/7 ONLINE</span>
+                    </div>
+                    <h2 class="chat-title">AI Academic Assistant</h2>
+                    <p class="chat-subtitle">Ask anything about your courses, syllabus, exams, or university procedures</p>
                 </div>
 
-                <div class="message">
-
-                    <p>Hello 👋</p>
-
-                    <p>I'm your AI Student Support Assistant.</p>
-
-                    <span class="time">Now</span>
-
+                <div class="header-actions">
+                    <button class="clear-btn" onclick="clearChat()" title="Clear chat history">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        <span>Clear Conversation</span>
+                    </button>
                 </div>
+            </header>
 
+            <!-- Message Stream Area -->
+            <section class="chat-box" id="chatBox">
+                <!-- Initial Welcome Message -->
+                <div class="bot-message">
+                    <div class="avatar-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                            <circle cx="12" cy="5" r="2"></circle>
+                            <path d="M12 7v4"></path>
+                            <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                            <line x1="16" y1="15" x2="16.01" y2="15"></line>
+                        </svg>
+                    </div>
+
+                    <div class="message">
+                        <p>Greetings! 👋</p>
+                        <p>I'm your **AI Student Support Assistant**. How can I assist you with your academics or campus queries today?</p>
+                        <span class="time">Just now</span>
+
+                        <div class="message-toolbar">
+                            <button class="action-icon copy-btn" title="Copy Message">📋</button>
+                            <button class="action-icon speak-btn" onclick="speak(`Greetings! I am your AI Student Support Assistant.`)" title="Read Aloud">🔊</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typing Indicator -->
+            <div id="typing" class="typing" style="display: none;">
+                <div class="typing-avatar">🤖</div>
+                <div class="typing-bubble">
+                    <span>AI Assistant is computing</span>
+                    <span class="typing-dots">
+                        <span>.</span><span>.</span><span>.</span>
+                    </span>
+                </div>
             </div>
 
-        </section>
+            <!-- Input Controls Area -->
+            <footer class="input-area">
+                <div class="input-container">
+                    <!-- File Upload Button -->
+                    <button class="input-btn file-btn" type="button" onclick="document.getElementById('fileInput').click()" title="Attach Document">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        </svg>
+                    </button>
+                    <input type="file" hidden id="fileInput">
 
-        <div id="typing" class="typing">
+                    <!-- Text Input Field -->
+                    <input
+                        type="text"
+                        id="userInput"
+                        placeholder="Type your question or query here..."
+                        autocomplete="off"
+                    >
 
-            🤖 Typing...
+                    <!-- Voice Mic Button -->
+                    <button class="input-btn mic-btn" type="button" id="micBtn" title="Voice Input">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
 
-        </div>
+                    <!-- Send Button -->
+                    <button class="input-btn send-btn" type="button" id="sendBtn" onclick="sendMessage()" title="Send Message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
 
-        <footer class="input-area">
+        </main>
 
-            <button onclick="document.getElementById('fileInput').click()">
+    </div>
 
-                📎
-
-            </button>
-
-            <input
-                type="file"
-                hidden
-                id="fileInput"
-            >
-
-            <input
-                type="text"
-                id="userInput"
-                placeholder="Ask your question..."
-            >
-
-            <button id="micBtn">
-
-                🎤
-
-            </button>
-
-            <button id="sendBtn" onclick="sendMessage()">
-
-                ➤
-
-            </button>
-
-        </footer>
-
-    </main>
-
-</div>
-
-<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
 </body>
 </html>
